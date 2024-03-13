@@ -33,6 +33,14 @@ tasks.named('test') {
 	useJUnitPlatform()
 }
 
-task deploy(dependsOn: bootJar) {
-	exec { commandLine 'docker-compose', 'push', 'api' }
+task localDeploy(dependsOn: bootJar) {
+	doLast {
+		exec { commandLine 'docker-compose', 'build', '--no-cache' }
+	}
+}
+
+task deploy(dependsOn: localDeploy) {
+	doLast {
+		exec { commandLine 'docker-compose', 'push', 'api' }
+	}
 }
