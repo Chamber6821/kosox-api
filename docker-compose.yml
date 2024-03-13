@@ -2,3 +2,5 @@ services:
   api:
     build: .
     image: chamber6821/kosox-api
+    environment:
+      - DB_URL=mysql://user:password@mysql/db
