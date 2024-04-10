@@ -22,4 +22,6 @@ public class Product {
   private Category category;
   @OneToMany(mappedBy = "product")
   private List<Image> images;
+  @OneToMany(mappedBy = "product")
+  private List<ProductParameter> parameters;
 }
