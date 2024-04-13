@@ -5,10 +5,13 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import lombok.Getter;
+import lombok.experimental.FieldNameConstants;
+
 import java.util.List;
 
 @Entity
 @Getter
+@FieldNameConstants
 public class Parameter {
   @Id
   private Long id;

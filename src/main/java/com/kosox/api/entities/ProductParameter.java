@@ -6,10 +6,12 @@ import jakarta.persistence.IdClass;
 import jakarta.persistence.ManyToOne;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.experimental.FieldNameConstants;
 
 @Entity
 @IdClass(ProductParameter.PId.class)
 @Getter
+@FieldNameConstants
 public class ProductParameter {
   @Id
   @ManyToOne
