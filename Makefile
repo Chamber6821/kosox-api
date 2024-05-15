@@ -1,4 +1,4 @@
 .PHONY: up
 up:
-	gradlew localDeploy
+	./gradlew localDeploy
 	cd ../entry && docker compose up api

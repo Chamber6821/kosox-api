@@ -37,12 +37,12 @@ tasks.named('test') {
 
 task localDeploy(dependsOn: bootJar) {
 	doLast {
-		exec { commandLine 'docker-compose', 'build', '--no-cache' }
+		exec { commandLine 'docker', 'compose', 'build' }
 	}
 }
 
 task deploy(dependsOn: localDeploy) {
 	doLast {
-		exec { commandLine 'docker-compose', 'push', 'api' }
+		exec { commandLine 'docker', 'compose', 'push', 'api' }
 	}
 }
