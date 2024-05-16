@@ -1,7 +1,9 @@
 package com.kosox.api.v1;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.springframework.data.domain.Pageable;
@@ -14,8 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kosox.api.entities.Category;
-import com.kosox.api.entities.Parameter;
-import com.kosox.api.entities.ParameterVariant;
 import com.kosox.api.entities.Product;
 import com.kosox.api.entities.ProductParameter;
 
@@ -24,7 +24,9 @@ import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @RestController
 @AllArgsConstructor
 @CrossOrigin
@@ -37,6 +39,8 @@ public class ProductFilterController {
       @RequestParam MultiValueMap<String, String> filters,
       Pageable pageable) {
     var pageableParams = List.of("page", "size", "sort");
+    log.info("Pageable: {}", pageable);
+    log.info("Filters: {}", filters);
     return products.findAll(
         (Specification<Product>) ((product, query, builder) -> builder.and(
             fromCategory(product, builder, categoryId),
@@ -52,13 +56,11 @@ public class ProductFilterController {
             builder.equal(
                 product
                     .join(Product.Fields.parameters)
-                    .join(ProductParameter.Fields.parameter)
-                    .get(Parameter.Fields.name),
+                    .get(ProductParameter.Fields.name),
                 entry.getKey()),
             product
                 .join(Product.Fields.parameters)
-                .join(ProductParameter.Fields.variant)
-                .get(ParameterVariant.Fields.value)
+                .get(ProductParameter.Fields.value)
                 .in(entry.getValue())))
         .toArray(Predicate[]::new));
   }
@@ -75,6 +77,7 @@ public class ProductFilterController {
     private final String icon;
     private final String brandName;
     private final String brandIcon;
+    private final Map<String, String> parameters;
 
     public StrictProduct(Product product) {
       id = product.getId();
@@ -83,6 +86,8 @@ public class ProductFilterController {
       icon = product.getIconUrl();
       brandName = product.getBrand().getName();
       brandIcon = product.getBrand().getIconUrl();
+      parameters = product.getParameters().stream()
+          .collect(Collectors.toMap(ProductParameter::getName, ProductParameter::getValue));
     }
   }
 }

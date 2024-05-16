@@ -21,6 +21,4 @@ public class Category {
   private SuperCategory superCategory;
   @OneToMany(mappedBy = "category")
   private List<Product> products;
-  @OneToMany(mappedBy = "category")
-  private List<Parameter> parameters;
 }
