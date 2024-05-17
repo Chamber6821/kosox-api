@@ -1,4 +1,4 @@
-package com.kosox.api.entities;
+package com.kosox.api.entity;
 
 import java.util.List;
 
@@ -9,11 +9,11 @@ import lombok.Getter;
 
 @Entity
 @Getter
-public class Brand {
+public class SuperCategory {
   @Id
   private Long id;
   private String name;
   private String iconUrl;
-  @OneToMany(mappedBy = "brand")
-  private List<Product> products;
+  @OneToMany(mappedBy = "superCategory")
+  private List<Category> categories;
 }

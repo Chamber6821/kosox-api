@@ -1,4 +1,4 @@
-package com.kosox.api.v1;
+package com.kosox.api.controller;
 
 import java.util.List;
 import java.util.Map;
@@ -15,9 +15,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.kosox.api.entities.Category;
-import com.kosox.api.entities.Product;
-import com.kosox.api.entities.ProductParameter;
+import com.kosox.api.entity.Category;
+import com.kosox.api.entity.Product;
+import com.kosox.api.entity.ProductParameter;
+import com.kosox.api.repository.ProductRepository;
 
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.Predicate;
@@ -35,10 +36,10 @@ public class ProductFilterController {
 
   @GetMapping("/categories/{id}/products/filtered")
   public Object findAll(
-      @PathVariable("id") Long categoryId,
-      @RequestParam MultiValueMap<String, String> filters,
-      Pageable pageable) {
-    var pageableParams = List.of("page", "size", "sort");
+      @PathVariable("id") final Long categoryId,
+      @RequestParam final MultiValueMap<String, String> filters,
+      final Pageable pageable) {
+    final var pageableParams = List.of("page", "size", "sort");
     log.info("Pageable: {}", pageable);
     log.info("Filters: {}", filters);
     return products.findAll(
@@ -49,8 +50,8 @@ public class ProductFilterController {
         pageable).map(StrictProduct::new);
   }
 
-  private Predicate withFilters(Root<Product> product, CriteriaBuilder builder,
-      Stream<Entry<String, List<String>>> filters) {
+  private Predicate withFilters(final Root<Product> product, final CriteriaBuilder builder,
+      final Stream<Entry<String, List<String>>> filters) {
     return builder.and(filters
         .map((entry) -> builder.and(
             builder.equal(
@@ -65,7 +66,7 @@ public class ProductFilterController {
         .toArray(Predicate[]::new));
   }
 
-  private Predicate fromCategory(Root<Product> product, CriteriaBuilder builder, Long categoryId) {
+  private Predicate fromCategory(final Root<Product> product, final CriteriaBuilder builder, final Long categoryId) {
     return builder.equal(product.join(Product.Fields.category).get(Category.Fields.id), categoryId);
   }
 
@@ -79,7 +80,7 @@ public class ProductFilterController {
     private final String brandIcon;
     private final Map<String, String> parameters;
 
-    public StrictProduct(Product product) {
+    public StrictProduct(final Product product) {
       id = product.getId();
       name = product.getName();
       description = product.getDescription();

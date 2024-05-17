@@ -1,4 +1,4 @@
-package com.kosox.api.controllers;
+package com.kosox.api.controller;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.kosox.api.v1.ProductParameterRepository;
+import com.kosox.api.repository.ProductParameterRepository;
 
 import lombok.AllArgsConstructor;
 

@@ -1,10 +1,11 @@
-package com.kosox.api.v1;
+package com.kosox.api.repository;
 
-import com.kosox.api.entities.SuperCategory;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
+import com.kosox.api.entity.SuperCategory;
+
 @CrossOrigin
 public interface SuperCategoryRepository
-    extends CrudRepository<SuperCategory, Long> {
+                                extends CrudRepository<SuperCategory, Long> {
 }

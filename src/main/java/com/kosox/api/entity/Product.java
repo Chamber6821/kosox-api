@@ -1,4 +1,4 @@
-package com.kosox.api.entities;
+package com.kosox.api.entity;
 
 import java.util.List;
 
