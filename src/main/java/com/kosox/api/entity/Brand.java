@@ -13,6 +13,7 @@ public class Brand {
   @Id
   private Long id;
   private String name;
+  private String description;
   private String iconUrl;
   @OneToMany(mappedBy = "brand")
   private List<Product> products;
