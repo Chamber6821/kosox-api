@@ -34,9 +34,9 @@ import lombok.extern.slf4j.Slf4j;
 public class ProductFilterController {
   private final ProductRepository products;
 
-  @GetMapping("/categories/{id}/products/filtered")
+  @GetMapping("/subcategories/{id}/products/filtered")
   public Object findAll(
-      @PathVariable("id") final Long categoryId,
+      @PathVariable("id") final Long subcategoryId,
       @RequestParam final MultiValueMap<String, String> filters,
       final Pageable pageable) {
     final var pageableParams = List.of("page", "size", "sort");
@@ -44,7 +44,7 @@ public class ProductFilterController {
     log.info("Filters: {}", filters);
     return products.findAll(
         (Specification<Product>) ((product, query, builder) -> builder.and(
-            fromCategory(product, builder, categoryId),
+            fromCategory(product, builder, subcategoryId),
             withFilters(product, builder,
                 filters.entrySet().stream().filter(entry -> !pageableParams.contains(entry.getKey()))))),
         pageable).map(StrictProduct::new);
