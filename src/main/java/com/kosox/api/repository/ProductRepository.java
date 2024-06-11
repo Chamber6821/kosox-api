@@ -11,12 +11,12 @@ import com.kosox.api.entity.Product;
 
 @CrossOrigin
 public interface ProductRepository extends JpaRepository<Product, Long>, JpaSpecificationExecutor<Product> {
-  public Page<Product> findByCategoryId(Long category, Pageable pageable);
+  public Page<Product> findBySubcategoryId(String subcategory, Pageable pageable);
 
   @Query("""
       SELECT p FROM Product p
-      JOIN p.brand b
-      JOIN p.category c
+      JOIN p.manufacturer b
+      JOIN p.subcategory c
       JOIN p.parameters pps
       WHERE
         lower(p.name) LIKE concat('%', lower(:fragment), '%')

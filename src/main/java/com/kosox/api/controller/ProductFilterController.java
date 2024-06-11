@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.kosox.api.entity.Category;
+import com.kosox.api.entity.Subcategory;
 import com.kosox.api.entity.Product;
 import com.kosox.api.entity.ProductParameter;
 import com.kosox.api.repository.ProductRepository;
@@ -67,7 +67,7 @@ public class ProductFilterController {
   }
 
   private Predicate fromCategory(final Root<Product> product, final CriteriaBuilder builder, final Long categoryId) {
-    return builder.equal(product.join(Product.Fields.category).get(Category.Fields.id), categoryId);
+    return builder.equal(product.join(Product.Fields.subcategory).get(Subcategory.Fields.id), categoryId);
   }
 
   @Getter
@@ -85,8 +85,8 @@ public class ProductFilterController {
       name = product.getName();
       description = product.getDescription();
       icon = product.getIconUrl();
-      brandName = product.getBrand().getName();
-      brandIcon = product.getBrand().getIconUrl();
+      brandName = product.getManufacturer().getName();
+      brandIcon = product.getManufacturer().getIconUrl();
       parameters = product.getParameters().stream()
           .collect(Collectors.toMap(ProductParameter::getName, ProductParameter::getValue));
     }

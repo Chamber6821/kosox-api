@@ -9,11 +9,12 @@ import lombok.Getter;
 
 @Entity
 @Getter
-public class SuperCategory {
+public class Manufacturer {
   @Id
-  private Long id;
+  private String id;
   private String name;
+  private String description;
   private String iconUrl;
-  @OneToMany(mappedBy = "superCategory")
-  private List<Category> categories;
+  @OneToMany(mappedBy = "manufacturer")
+  private List<Product> products;
 }

@@ -16,13 +16,13 @@ import lombok.AllArgsConstructor;
 @RestController
 @AllArgsConstructor
 @CrossOrigin
-public class CategoryParameters {
+public class SubcategoryParameters {
 
   private final ProductParameterRepository parameters;
 
-  @GetMapping("/categories/{id}/parameters")
+  @GetMapping("/subcategories/{id}/parameters")
   public Object parameters(@PathVariable Long id) {
-    return parameters.forCategory(id).stream()
+    return parameters.forSubcategory(id).stream()
         .collect(Collectors.toMap(
             x -> x.name(),
             x -> List.of(x.value()),

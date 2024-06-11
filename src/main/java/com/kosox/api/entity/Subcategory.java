@@ -4,17 +4,21 @@ import java.util.List;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import lombok.Getter;
+import lombok.experimental.FieldNameConstants;
 
 @Entity
 @Getter
-public class Brand {
+@FieldNameConstants
+public class Subcategory {
   @Id
-  private Long id;
+  private String id;
   private String name;
-  private String description;
   private String iconUrl;
-  @OneToMany(mappedBy = "brand")
+  @ManyToOne
+  private Category category;
+  @OneToMany(mappedBy = "subcategory")
   private List<Product> products;
 }

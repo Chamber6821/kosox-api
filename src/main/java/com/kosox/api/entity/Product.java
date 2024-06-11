@@ -19,9 +19,9 @@ public class Product {
   private String description;
   private String iconUrl;
   @ManyToOne
-  private Brand brand;
+  private Manufacturer manufacturer;
   @ManyToOne
-  private Category category;
+  private Subcategory subcategory;
   @OneToMany(mappedBy = "product")
   private List<Image> images;
   @OneToMany(mappedBy = "product")
