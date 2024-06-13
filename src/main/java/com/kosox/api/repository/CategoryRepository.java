@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import com.kosox.api.entity.Category;
 
 @CrossOrigin
-public interface CategoryRepository extends CrudRepository<Category, Long> {
+public interface CategoryRepository extends CrudRepository<Category, String> {
   @Query("""
       SELECT c FROM Category c
       JOIN c.subcategories s

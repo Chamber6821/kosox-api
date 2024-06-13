@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import com.kosox.api.entity.Subcategory;
 
 @CrossOrigin
-public interface SubcategoryRepository extends JpaRepository<Subcategory, Long> {
+public interface SubcategoryRepository extends JpaRepository<Subcategory, String> {
   @Query("""
       SELECT c FROM Subcategory c
       JOIN c.products pc
