@@ -12,6 +12,7 @@ import lombok.Getter;
 public class Manufacturer {
   @Id
   private String id;
+  private Boolean visible;
   private String name;
   private String description;
   private String iconUrl;
