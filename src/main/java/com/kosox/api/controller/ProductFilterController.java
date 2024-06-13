@@ -36,7 +36,7 @@ public class ProductFilterController {
 
   @GetMapping("/subcategories/{id}/products/filtered")
   public Object findAll(
-      @PathVariable("id") final Long subcategoryId,
+      @PathVariable("id") final String subcategoryId,
       @RequestParam final MultiValueMap<String, String> filters,
       final Pageable pageable) {
     final var pageableParams = List.of("page", "size", "sort");
@@ -66,7 +66,7 @@ public class ProductFilterController {
         .toArray(Predicate[]::new));
   }
 
-  private Predicate fromCategory(final Root<Product> product, final CriteriaBuilder builder, final Long categoryId) {
+  private Predicate fromCategory(final Root<Product> product, final CriteriaBuilder builder, final String categoryId) {
     return builder.equal(product.join(Product.Fields.subcategory).get(Subcategory.Fields.id), categoryId);
   }
 

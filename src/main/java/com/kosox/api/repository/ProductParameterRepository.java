@@ -19,7 +19,7 @@ public interface ProductParameterRepository extends JpaRepository<ProductParamet
       GROUP BY pp.name, pp.value
       ORDER BY pp.name, pp.value
       """)
-  public List<Parameter> forSubcategory(Long subcategoryId);
+  public List<Parameter> forSubcategory(String subcategoryId);
 
   public record Parameter(String name, String value) {
   }

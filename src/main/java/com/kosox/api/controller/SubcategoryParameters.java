@@ -21,7 +21,7 @@ public class SubcategoryParameters {
   private final ProductParameterRepository parameters;
 
   @GetMapping("/subcategories/{id}/parameters")
-  public Object parameters(@PathVariable Long id) {
+  public Object parameters(@PathVariable String id) {
     return parameters.forSubcategory(id).stream()
         .collect(Collectors.toMap(
             x -> x.name(),
