@@ -85,8 +85,8 @@ public class ProductFilterController {
       name = product.getName();
       description = product.getDescription();
       icon = product.getIconUrl();
-      brandName = product.getManufacturer().getName();
-      brandIcon = product.getManufacturer().getIconUrl();
+      brandName = product.getManufacturer().getBrand() ? product.getManufacturer().getName() : null;
+      brandIcon = product.getManufacturer().getBrand() ? product.getManufacturer().getIconUrl() : null;
       parameters = product.getParameters().stream()
           .collect(Collectors.toMap(ProductParameter::getName, ProductParameter::getValue));
     }
