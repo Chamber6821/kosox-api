@@ -13,6 +13,7 @@ public class Manufacturer {
   @Id
   private String id;
   private Boolean visible;
+  private Boolean brand;
   private String name;
   private String description;
   private String iconUrl;
