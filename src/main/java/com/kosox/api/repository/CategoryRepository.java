@@ -18,5 +18,5 @@ public interface CategoryRepository extends CrudRepository<Category, String> {
       WHERE psm.id = :manufacturerId
       GROUP BY c
       """)
-  public Set<Category> findAllByManufacturer(Long manufacturerId);
+  public Set<Category> findAllByManufacturer(String manufacturerId);
 }
